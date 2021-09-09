@@ -1,0 +1,159 @@
+<head>
+    <meta charset="UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNIC Location Tracker</title>
+    <script>
+	function error(msg)
+	{
+	    document.getElementById("error").innerHTML = msg;
+	}
+	
+	function warn(msg)
+	{
+	    document.getElementById("warn").innerHTML = msg;
+	}
+	
+    function trackLocation()
+    {
+	    var cnic = document.getElementById("cnic");
+        var val = cnic.value.trim();
+		if(val.length != 13) return error("CNIC should be 13 digit long");
+		if(val.length != 13) return error("CNIC should be 13 digit long");
+		error("");
+		warn("");
+		gender(val);
+		province(val);
+    }
+	
+    function isNumberKey(num)
+	{
+	    trackLocation();
+        var charCode = (num.which) ? num.which : num.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    </script>
+</head>
+<body style="background-color:lightgray;">
+    <center>
+        <input 
+    	    id="cnic" 
+    		oninput="trackLocation()" 
+			onkeypress="return isNumberKey(event)"
+    		placeholder="Enter full CNIC without dashes like 1560277306097"
+            style="width:330"
+            pattern="[0-9]"			
+    	/><br/>
+		
+        <p id="error" style="color:red"></p>
+        <p id="warn" style="color:yellow"></p>
+        <p id="Location"></p>
+        <p id="Gender"></p>
+    </center>
+</body>
+
+<script>
+var Location = document.getElementById("Location");
+var Gender = document.getElementById("Gender");
+
+//BALOCHISTAN
+function balochistan_division(cnic)
+{
+    var num2 = cnic.charAt(1);
+    if(num2 == 1)           {   Location.innerHTML += "KALAT, ";           }
+    else if(num2 == 3)      {   Location.innerHTML += "NASEERABAD, ";      }
+    else if(num2 == 4)      {   Location.innerHTML += "QUETTA, ";          }
+    else if(num2 == 5)      {   Location.innerHTML += "SIBI, ";            }
+    else if(num2 == 6)      {   Location.innerHTML += "ZHOB, ";            }
+	else return warn("Division NOT found");
+}
+//BALOCHISTAN
+
+//SINDH
+function sindh_division(cnic)
+{
+    var num2 = cnic.charAt(1);
+    if(num2 == 1)      {   Location.innerHTML += "HYDERABAD, ";      }
+    else if(num2 == 2) {   Location.innerHTML += "KARACHI, ";        }
+    else if(num2 == 3) {   Location.innerHTML += "LARKANA, ";        }
+    else if(num2 == 4) {   Location.innerHTML += "MIRPUR KHAS, ";    }
+    else if(num2 == 5) {   Location.innerHTML += "SUKKUR, ";         }
+	else return warn("Division NOT found");
+}
+//SINDH
+
+//PUNJAB
+function punjab_division(cnic)
+{
+    var num2 = cnic.charAt(1);
+    if(num2 == 1)      {   Location.innerHTML += "BAHAWALPUR, ";      }
+    else if(num2 == 2) {   Location.innerHTML += "DERA GHAZI KHAN, "; }
+    else if(num2 == 3) {   Location.innerHTML += "FAISALABAD, ";      }
+    else if(num2 == 4) {   Location.innerHTML += "GUJRANWALA, ";      }
+    else if(num2 == 5) {   Location.innerHTML += "LAHORE, ";          }
+    else if(num2 == 6) {   Location.innerHTML += "MULTAN, ";          }
+    else if(num2 == 7) {   Location.innerHTML += "RAWALPINDI, ";      }
+    else if(num2 == 8) {   Location.innerHTML += "SARGODHA, ";        }
+	else return warn("Division NOT found");
+
+}
+//PUNJAB
+
+//KPK
+    //3 HAZARA
+	    function hazara_district(cnic)
+		{
+            var num3 = cnic.charAt(2);
+            if(num3 == 1) {Location.innerHTML += "ABBOTTABAD, ";}
+            else if(num3 == 2) {Location.innerHTML += "BATAGRAM, ";}
+            else if(num3 == 3) {Location.innerHTML += "HARIPUR, ";}
+            else if(num3 == 4) {Location.innerHTML += "KOHISTAN, ";}
+            else if(num3 == 5) {Location.innerHTML += "MANSEHRA, ";}
+	        else return warn("District NOT found");
+		}
+    //3 HAZARA
+	
+
+	
+function kpk_division(cnic)
+{
+    var num2 = cnic.charAt(1);
+    if(num2 == 2) {Location.innerHTML += "DERA ISMAIL KHAN, ";                              }
+    else if(num2 == 3) {Location.innerHTML += "HAZARA, ";        hazara_district(cnic);     }
+    else if(num2 == 6) {Location.innerHTML += "MARDAN, ";                                   }
+    else if(num2 == 7) {Location.innerHTML += "PESHAWAR, ";                                 }
+	else return warn("Division NOT found");
+}
+//KPK
+
+function province(cnic)
+{
+    var num1 = cnic.charAt(0);
+	Location.innerHTML = "Residence: ";
+    if(num1 == 1)      {Location.innerHTML += "KPK, ";          kpk_division(cnic);            }
+    else if(num1 == 2) {Location.innerHTML += "FATA, ";                                        }
+    else if(num1 == 3) {Location.innerHTML += "PUNJAB, ";       punjab_division(cnic);         }
+    else if(num1 == 4) {Location.innerHTML += "SINDH, ";        sindh_division(cnic)           }
+    else if(num1 == 5) {Location.innerHTML += "BALOCHISTAN, ";  balochistan_division(cnic);    }
+    else if(num1 == 6) {Location.innerHTML += "ISLAMABAD, ";                                   }
+    else if(num1 == 7) {Location.innerHTML += "GILGIT, ";                                      }
+	else return warn("Province NOT found");
+}
+
+function gender(cnic)
+{
+    Gender.innerHTML = "Gender: ";
+    var num13 = cnic.charAt(12);
+    if(num13 == 1 || num13 == 3 || num13 == 5 || num13 == 7 || num13 == 9)  Gender.innerHTML += "Male";
+    else if(num13 == 2 || num13 == 4 || num13 == 6 || num13 == 8)           Gender.innerHTML += "Female";
+	else 
+	{
+	    Gender.innerHTML = ""
+	    return error("Gender NOT found");
+	}
+}
+</script>
+
+
