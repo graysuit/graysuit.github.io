@@ -2,39 +2,37 @@
     <meta charset="UTF8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CNIC Location Tracker</title>
-    <script>
-	function error(msg)
-	{
-	    document.getElementById("error").innerHTML = msg;
-	}
+<script>
+    function error(msg)
+    {
+        document.getElementById("error").innerHTML = msg;
+    }
 	
-	function warn(msg)
-	{
-	    document.getElementById("warn").innerHTML = msg;
-	}
+    function warn(msg)
+    {
+        document.getElementById("warn").innerHTML = msg;
+    }
 	
     function trackLocation()
     {
-	    var cnic = document.getElementById("cnic");
+        var cnic = document.getElementById("cnic");
         var val = cnic.value.trim();
-		if(val.length != 13) return error("CNIC should be 13 digit long");
-		if(val.length != 13) return error("CNIC should be 13 digit long");
-		error("");
-		warn("");
-		gender(val);
-		province(val);
+        if(val.length != 13) return error("CNIC should be 13 digit long");
+        error("");
+        warn("");
+        gender(val);
+        province(val);
     }
 	
     function isNumberKey(num)
-	{
-	    trackLocation();
+    {
+        trackLocation();
         var charCode = (num.which) ? num.which : num.keyCode
-        if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
         return true;
     }
-
-    </script>
+</script>
+	
 </head>
 <body style="background-color:lightgray;">
     <center>
