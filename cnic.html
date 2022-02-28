@@ -1,0 +1,12 @@
+<script>
+var url = "https://raw.githubusercontent.com/graysuit/cnic/main/index.html";
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) 
+    {
+        document.write(xhr.responseText);
+    }
+}
+xhr.open('GET', url, true);
+xhr.send(null);
+</script>
