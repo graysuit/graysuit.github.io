@@ -1,0 +1,3 @@
+[submodule "cnic"]
+	path = cnic
+	url = https://github.com/graysuit/cnic
