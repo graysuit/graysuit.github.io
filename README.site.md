@@ -21,7 +21,7 @@ graysuit/graysuit repo root     <- served at https://graysuit.github.io/
     projects.html       Filterable, expandable project grid
     skills.html         Expert / Strong / Good / Archived / Skip
     about.html          Bio + timeline 2019 → now
-    contact.html        Fiverr, GitHub, LinkedIn, Discord, location
+    contact.html        GitHub, LinkedIn, Discord, location
   404.html
   assets/css/style.css          Design system
   assets/js/
